@@ -16,11 +16,15 @@ function alarm(person, delay) {
         throw new Error("アラームの待ち時間を負数にすることはできません。");
       }
       setTimeout(() => {
-        resolve(`${person}、起きて！`);
+        resolve(`${person}、起きて！,${delay / 1000}秒後`);
       }, delay);
     });
   }
 
 button.addEventListener('click', () => {
     alarm(name.value, delay.value)
+      .then((message) => (output.textContent = message))
+      .catch(
+        (error) => (output.textContent = `アラームを設定できません: ${error}`)
+      )
 })
